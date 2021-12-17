@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import csv
+from tqdm import tqdm
 
 def del_html(text):
     # 엔터 삭제
@@ -19,15 +20,15 @@ def del_html(text):
     
     return text
 
-data = pd.read_csv('./clear/writing/writing_paragraph.csv')
+data = pd.read_csv('./df_origin_jae.csv')
 new_data = data['paragraph_txt']
 str_list = []
 header="paragraph_txt"
-for i in new_data:
+for i in tqdm(new_data):
     new_str = del_html(i)
     str_list.append(new_str)
 
 output_df = pd.DataFrame({'paragraph_txt' : str_list})
-output_df.to_csv('new_writing_para.csv', index=False)
+output_df.to_csv('new_df.csv', index=False)
 #new_data = del_html(data['paragraph_txt'])
 #print(new_data)
