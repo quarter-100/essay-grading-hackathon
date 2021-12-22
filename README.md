@@ -1,11 +1,11 @@
-# 🥇 [에세이 글 데이터 인공지능 학습용 데이터 해커톤](https://dataton.gabia.io/sub.php?code=6&mode=view&no=19&category=&page=1&search=&keyword=)
+# 🥇 [인공지능 모델 알고리즘 개발 해커톤 - 에세이 글 데이터](https://dataton.gabia.io/sub.php?code=6&mode=view&no=19&category=&page=1&search=&keyword=)
 
 ---
 ## 🙋‍♂️팀원 소개
 |김다영|김다인|박재형|정민지|최석민|
 | :---: | :---: | :---: | :---: | :---: | 
 | <a href="https://github.com/keemdy" height="5" width="10" target="_blank"><img src="https://avatars.githubusercontent.com/u/68893924?v=4" width="80%" height="80%"> | <a href="https://github.com/danny980521" height="5" width="10" target="_blank"><img src="https://avatars.githubusercontent.com/u/77524474?v=4" width="80%" height="80%">| <a href="https://github.com/Jay-Ppark" height="5" width="10" target="_blank"><img src="https://avatars.githubusercontent.com/u/29303223?v=4" width="80%" height="80%">| <a href="https://github.com/minji-o-j" height="5" width="10" target="_blank"><img src="https://avatars.githubusercontent.com/u/45448731?v=4" width="80%" height="80%">| <a href="https://github.com/RockMiin" height="5" width="10" target="_blank"><img src="https://avatars.githubusercontent.com/u/52374789?v=4" width="80%" height="80%">|
-|||Data 전처리,<br> 맞춤법과 띄어쓰기를<br> 이용한 feature 생성|eda, 조사를 이용한 feature 생성| <!--***여기에 각자 역할 적어!-->
+|EDA|DL 모델링, Data 전처리,<br> 발표|Data 전처리,<br> 맞춤법과 띄어쓰기를<br> 이용한 feature 생성|EDA,<br> 조사를 이용한 feature 생성|DL, ML 모델링| <!--***여기에 각자 역할 적어!-->
   
 ---
 ## 🎈 주제 및 대회 목적
@@ -24,11 +24,11 @@
 ---
 ## 💻 프로젝트 내용  
 ### 1. 구현하고자 하는 것  
-에세이의 문맥과 문법을 모두 고려하는 에세이 등급 자동 분류기  
+에세이의 문맥과 문법을 모두 고려하는 **에세이 등급 자동 분류기**  
 
 ### 2. Model Algorithm  
-* klue/roberta-large : 에세이의 문맥을 고려하여 등급 분류  
-* lightgbm : 에세이의 문법적 요소를 수치화한 feature로 등급 분류  
+* **klue/roberta-large** : 에세이의 문맥을 고려하여 등급 분류  
+* **lightgbm** : 에세이의 문법적 요소를 수치화한 feature로 등급 분류  
 
 ### 3. Passage Data 전처리  
 * 정규표현식을 이용하여 html 태그 제거  
@@ -64,7 +64,6 @@
     * MeCab Pos Tagging: `('친구', 'NNG'), ('가', 'JKS'), ('될', 'VV+ETM'), ('수', 'NNB'), ('있', 'VV'), ('다', 'EF'), ('.', 'SF')`
     * MeCab Pos Tagging: `('친구', 'NNG'), ('가', 'JKS'), ('될', 'VV+ETM'), ('수', 'NNB'), ('있', 'VV'), ('다', 'EC')`
 
-
 #### 5) 어순  
 * 주격조사 앞에는 체언이 있어야한다.
 * 보격조사 앞에는 체언이 있어야한다.
@@ -72,9 +71,12 @@
     * Ex) 목적격 조사의 예시
         * 학생이 쓴 글: `('바다', 'NNG'), ('를', 'JKO'), ('사람', 'NNG'), ('들', 'XSN'), ('은', 'JX')`
         * 첨삭된 Data: `('사람', 'NNG'), ('들', 'XSN'), ('은', 'JX'), ('바다', 'NNG'), ('를', 'JKO')`
+
 ### 5. Modeling
-<br>
+
+<div style="text-align : center;">
 <img src="./images/2021-12-22-23-52-36.png" width="50%" height="50%"> 
+</div>
 
 * 딥러닝 모델과 머신러닝 모델 하나만 사용하기에는 문맥과 문법을 둘 다 고려할 수 없다고 판단을 하였다.
 * **문법적인 요소**는 수치상으로 표현이 가능하여 **머신러닝 모델**을 사용하기로 결정하였다.
@@ -90,16 +92,17 @@
 * **퍼센트 기준으로 균등하게 4개의 등급(A, B, C, D)** 을 매기는 방식을 사용하였다.
 * 기존 score 기준으로 매긴 등급과 예측한 score 기준으로 매긴 등급의 일치함을 기준으로 **accuracy**를 산출하였고 이를 metric으로 사용하였다.
 ### 7. 결과 (accuracy)
---- 
 * ML(LightGBM) : 38.8%
 * DL(RoBERTa-Large) : 42%
 
+---
 ## 🏆 결과
-1위 
+**1위** 
+
 ---
 ## 🔥 느낀점
 - **김다영**:
 - **김다인**: 생각보다 accuracy가 너무 안 나온 점이 가장 아쉽다. 점수를 올리는 여러가지 방법들을 시간 문제로 적용하지 못했기에 다음엔 이러한 부분에 더욱 신경써야겠다.
 - **박재형**: 에세이 데이터를 평가하기 위해 feature를 만들어도 실제 점수에 영향이 있는지 판단하는 것이 매우 어려웠지만 재미있었다. 모델 결과가 많이 낮아서 조금 아쉽지만 짧은 시간 내에 다양한 실험을 할 수 있어서 좋았다.
-- **정민지**:
-- **최석민**:
+- **정민지**: 텍스트 자동 평가에 대한 정보가 생각보다 많이 없는 것에 놀랐고, 평가 아이디어를 내는 과정이 어려웠다. 그래도 짧은 시간에 재미있게 참여한 대회인 것 같다.
+- **최석민**: 주어진 짧은 시간내에 결과물을 내야한다는 것이 어려웠던 것 같습니다. 실제 데이터에 맞는 평가 지표와 모델링을 하는 것은 어려웠지만, 팀원들과 함께여서 좋은 성과까지 낼 수 있었던 것 같습니다.
