@@ -58,9 +58,7 @@ def inference(model, tokenized_data, device, args):
 
 
 def num_to_label(label):
-    """
-    숫자로 되어 있던 class를 원본 문자열 라벨로 변환 합니다.
-    """
+
     origin_label = []
     dict_label_to_num = {
         "D" : 0, "C" : 1, "B" : 2, "A" : 3
@@ -72,15 +70,10 @@ def num_to_label(label):
     return origin_label
 
 def load_test_dataset(dataset_dir, tokenizer, args):
-    """
-    test dataset을 불러온 후,
-    tokenizing 합니다.
-    """
 
     preprocess= Preprocess(dataset_dir)
     
     test_dataset = preprocess.load_data(dataset_dir)
-    #test_label = list(map(int,test_dataset['감정_소분류'].values))
     test_label = [0] * test_dataset.shape[0]
     tokenized_test = preprocess.tokenized_dataset(test_dataset, tokenizer)
 
@@ -103,8 +96,6 @@ def main_inference(args):
         model_config.num_labels = 4
 
         model =  AutoModelForSequenceClassification.from_pretrained(args.model, config=model_config)
-        #model= Model(args.model)
-        #model.model.resize_token_embeddings(tokenizer.vocab_size + args.add_token)
 
         best_state_dict= torch.load(os.path.join(f'{args.model_path}', 'pytorch_model.bin'))
         model.load_state_dict(best_state_dict)
